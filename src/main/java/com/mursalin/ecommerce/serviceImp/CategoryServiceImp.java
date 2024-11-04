@@ -9,6 +9,8 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CategoryServiceImp implements CategoryService {
 
@@ -26,5 +28,11 @@ public class CategoryServiceImp implements CategoryService {
         }
         else
             return new ResponseEntity<>("couldn't add new category because of null category",HttpStatus.BAD_REQUEST);
+    }
+
+    @Override
+    public ResponseEntity<List<Category>> getCategories() {
+        List<Category> categories = repo.findAll();
+        return new ResponseEntity<>(categories, HttpStatus.FOUND);
     }
 }

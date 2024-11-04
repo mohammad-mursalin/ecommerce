@@ -4,10 +4,9 @@ import com.mursalin.ecommerce.model.Category;
 import com.mursalin.ecommerce.service.CategoryService;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -22,5 +21,10 @@ public class CategoryController {
     @PostMapping("/admin/category")
     public ResponseEntity<String> createCategory(@RequestBody Category category) {
         return service.createCategory(category);
+    }
+
+    @GetMapping("/user/categories")
+    public ResponseEntity<List<Category>> getCategories() {
+        return service.getCategories();
     }
 }
