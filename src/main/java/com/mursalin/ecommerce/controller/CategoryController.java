@@ -27,4 +27,9 @@ public class CategoryController {
     public ResponseEntity<List<Category>> getCategories() {
         return service.getCategories();
     }
+
+    @PutMapping("/admin/categories/{id}")
+    public ResponseEntity<Category> updateCategory(@PathVariable long id, @RequestBody Category category) {
+        return service.updateCategory(id,category);
+    }
 }

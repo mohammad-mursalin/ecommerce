@@ -11,4 +11,6 @@ public interface CategoryService {
     ResponseEntity<String> createCategory(Category category);
 
     ResponseEntity<List<Category>> getCategories();
+
+    ResponseEntity<Category> updateCategory(long id, Category category);
 }

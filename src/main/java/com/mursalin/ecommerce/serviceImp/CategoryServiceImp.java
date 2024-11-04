@@ -8,8 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryServiceImp implements CategoryService {
@@ -34,5 +36,16 @@ public class CategoryServiceImp implements CategoryService {
     public ResponseEntity<List<Category>> getCategories() {
         List<Category> categories = repo.findAll();
         return new ResponseEntity<>(categories, HttpStatus.FOUND);
+    }
+
+    @Override
+    public ResponseEntity<Category> updateCategory(long id, Category category) {
+        Optional<Category> savedCategory = repo.findById(id);
+        if(savedCategory.isPresent()) {
+            category.setId(id);
+            repo.save(category);
+            return new ResponseEntity<>(category, HttpStatus.OK);
+        }
+        return ResponseEntity.notFound().build();
     }
 }
