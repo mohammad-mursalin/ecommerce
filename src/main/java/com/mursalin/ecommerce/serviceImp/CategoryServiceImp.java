@@ -48,4 +48,13 @@ public class CategoryServiceImp implements CategoryService {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @Override
+    public ResponseEntity<String> deleteCategory(long id) {
+        if(repo.existsById(id)) {
+            repo.deleteById(id);
+            return new ResponseEntity<>("category deleted with id " + id,HttpStatus.GONE);
+        }
+        return new ResponseEntity("category not found with id " + id, HttpStatus.NOT_FOUND);
+    }
 }
